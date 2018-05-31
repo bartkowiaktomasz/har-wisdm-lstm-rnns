@@ -192,7 +192,7 @@ if __name__ == '__main__':
     plt.xlabel('Training Epoch')
     plt.ylim(0)
 
-    plt.show()
+    #plt.show()
 
 
     # CONFUSION MATRIX
@@ -206,4 +206,4 @@ if __name__ == '__main__':
     plt.title("Confusion matrix")
     plt.ylabel('True label')
     plt.xlabel('Predicted label')
-    plt.show();
+    #plt.show();
