@@ -134,7 +134,7 @@ if __name__ == '__main__':
 
     ##### BUILD A MODEL
     # Placeholders
-    X = tf.placeholder(tf.float32, [None, SEGMENT_TIME_SIZE, N_FEATURES])
+    X = tf.placeholder(tf.float32, [None, SEGMENT_TIME_SIZE, N_FEATURES], name="input")
     y = tf.placeholder(tf.float32, [None, N_CLASSES])
 
     y_pred = createLSTM(X)
