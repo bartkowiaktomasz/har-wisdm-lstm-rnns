@@ -3,7 +3,6 @@ import pandas as pd
 import tensorflow as tf
 import seaborn as sns
 from scipy import stats
-from pylab import rcParams
 from sklearn import metrics
 from sklearn.model_selection import train_test_split
 
@@ -11,6 +10,8 @@ import pickle
 
 import matplotlib
 matplotlib.use('Agg')   # Use Agg backend to save figures
+
+from pylab import rcParams
 import matplotlib.pyplot as plt
 
 ##################################################
@@ -101,8 +102,8 @@ if __name__ == '__main__':
     data = data.dropna()
 
     # SHOW ACTIVITY GRAPH
-    # activity_type = data['activity'].value_counts().plot(kind='bar', title='Activity type')
-    # activity_type.savefig('activity_type.png')
+    activity_type = data['activity'].value_counts().plot(kind='bar', title='Activity type')
+    activity_type.savefig('activity_type.png')
 
     # DATA PREPROCESSING
     data_convoluted = []
