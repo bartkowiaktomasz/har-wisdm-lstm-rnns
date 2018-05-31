@@ -37,7 +37,7 @@ RANDOM_SEED = 13
 
 # Data preprocessing
 SEGMENT_TIME_SIZE = 200
-TIME_STEP = 20
+TIME_STEP = 200
 
 # Model
 N_CLASSES = 6
@@ -69,7 +69,8 @@ def createLSTM(input):
         'output': tf.Variable(tf.Variable(tf.random_normal([N_CLASSES])))
     }
 
-    # Reshape to 2D of size (BATCH_SIZE * SEGMENT_TIME_SIZE, N_FEATURES)
+    # Transpose and then reshape to 2D of size (BATCH_SIZE * SEGMENT_TIME_SIZE, N_FEATURES)
+    X = tf.transpose(input, [1, 0, 2])
     input = tf.reshape(input, [-1, N_FEATURES])
     hidden = tf.nn.relu(tf.matmul(input, weights['hidden']) + biases['hidden'])
     hidden = tf.split(hidden, SEGMENT_TIME_SIZE, 0)
