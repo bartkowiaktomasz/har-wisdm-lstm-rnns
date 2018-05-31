@@ -57,22 +57,22 @@ LEARNING_RATE = 0.0025
 
 # Returns a tenforflow LSTM NN
 # Input of shape (BATCH_SIZE, SEGMENT_TIME_SIZE, N_FEATURES)
-def createLSTM(input):
+def createLSTM(X):
 
-    weights = {
+    W = {
         'hidden': tf.Variable(tf.random_normal([N_FEATURES, N_HIDDEN_NEURONS])),
         'output': tf.Variable(tf.random_normal([N_HIDDEN_NEURONS, N_CLASSES]))
     }
 
-    biases = {
+    b = {
         'hidden': tf.Variable(tf.random_normal([N_HIDDEN_NEURONS], mean=1.0)),
         'output': tf.Variable(tf.Variable(tf.random_normal([N_CLASSES])))
     }
 
     # Transpose and then reshape to 2D of size (BATCH_SIZE * SEGMENT_TIME_SIZE, N_FEATURES)
-    X = tf.transpose(input, [1, 0, 2])
-    input = tf.reshape(input, [-1, N_FEATURES])
-    hidden = tf.nn.relu(tf.matmul(input, weights['hidden']) + biases['hidden'])
+    X = tf.transpose(X, [1, 0, 2])
+    X = tf.reshape(X, [-1, N_FEATURES])
+    hidden = tf.nn.relu(tf.matmul(X, W['hidden']) + b['hidden'])
     hidden = tf.split(hidden, SEGMENT_TIME_SIZE, 0)
 
     # Stack two LSTM cells on top of each other
@@ -85,7 +85,7 @@ def createLSTM(input):
     # Get output for the last time step from a "many to one" architecture
     last_output = outputs[-1]
 
-    return tf.matmul(last_output, weights['output'] + biases['output'])
+    return tf.matmul(last_output, W['output'] + b['output'])
 
 ##################################################
 ### MAIN
@@ -134,7 +134,7 @@ if __name__ == '__main__':
 
     ##### BUILD A MODEL
     # Placeholders
-    X = tf.placeholder(tf.float32, [None, SEGMENT_TIME_SIZE, N_FEATURES], name="input")
+    X = tf.placeholder(tf.float32, [None, SEGMENT_TIME_SIZE, N_FEATURES], name="X")
     y = tf.placeholder(tf.float32, [None, N_CLASSES])
 
     y_pred = createLSTM(X)
