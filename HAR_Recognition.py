@@ -84,7 +84,7 @@ if __name__ == '__main__':
     data = data.dropna()
 
     # SHOW ACTIVITY GRAPH
-    data['activity'].value_counts().plot(kind='bar', title='Activity type')
+    # data['activity'].value_counts().plot(kind='bar', title='Activity type')
 
     # DATA PREPROCESSING
     data_convoluted = []
@@ -179,7 +179,7 @@ if __name__ == '__main__':
     plt.xlabel('Training Epoch')
     plt.ylim(0)
 
-    plt.show()
+    #plt.show()
 
 
     # CONFUSION MATRIX
@@ -194,4 +194,4 @@ if __name__ == '__main__':
     plt.title("Confusion matrix")
     plt.ylabel('True label')
     plt.xlabel('Predicted label')
-    plt.show();
+    #plt.show();
