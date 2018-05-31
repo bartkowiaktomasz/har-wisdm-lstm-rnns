@@ -97,7 +97,7 @@ if __name__ == '__main__':
     data = data.dropna()
 
     # SHOW ACTIVITY GRAPH
-    data['activity'].value_counts().plot(kind='bar', title='Activity type')
+    # data['activity'].value_counts().plot(kind='bar', title='Activity type')
 
     # DATA PREPROCESSING
     data_convoluted = []
