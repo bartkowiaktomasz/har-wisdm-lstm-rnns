@@ -10,9 +10,9 @@ import pickle
 
 import matplotlib
 matplotlib.use('Agg')   # Use Agg backend to save figures
+import matplotlib.pyplot as plt
 
 from pylab import rcParams
-import matplotlib.pyplot as plt
 
 ##################################################
 ### GLOBAL VARIABLES
