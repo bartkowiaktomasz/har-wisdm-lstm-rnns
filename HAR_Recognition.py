@@ -3,16 +3,15 @@ import pandas as pd
 import tensorflow as tf
 import seaborn as sns
 from scipy import stats
+from pylab import rcParams
 from sklearn import metrics
 from sklearn.model_selection import train_test_split
 
 import pickle
 
 import matplotlib
-matplotlib.use('Agg')   # Use Agg backend to save figures
+#matplotlib.use('Agg')   # Use Agg backend to save figures
 import matplotlib.pyplot as plt
-
-from pylab import rcParams
 
 ##################################################
 ### GLOBAL VARIABLES
@@ -41,7 +40,7 @@ RANDOM_SEED = 13
 
 # Data preprocessing
 SEGMENT_TIME_SIZE = 200
-TIME_STEP = 200
+TIME_STEP = 100
 
 # Model
 N_CLASSES = 6
@@ -76,6 +75,7 @@ def createLSTM(X):
     # Transpose and then reshape to 2D of size (BATCH_SIZE * SEGMENT_TIME_SIZE, N_FEATURES)
     X = tf.transpose(X, [1, 0, 2])
     X = tf.reshape(X, [-1, N_FEATURES])
+
     hidden = tf.nn.relu(tf.matmul(X, W['hidden']) + b['hidden'])
     hidden = tf.split(hidden, SEGMENT_TIME_SIZE, 0)
 
@@ -101,14 +101,20 @@ if __name__ == '__main__':
     data['z-axis'].replace({';': ''}, regex=True, inplace=True)
     data = data.dropna()
 
+    # SHOW GRAPH FOR JOGGING
+    data[data['activity'] == 'Jogging'][['x-axis']][:50].plot(subplots=True, figsize=(16, 12), title='Jogging')
+    plt.xlabel('Timestep')
+    plt.ylabel('X acceleration (dg)')
+
     # SHOW ACTIVITY GRAPH
-    activity_type = data['activity'].value_counts().plot(kind='bar', title='Activity type')
-    activity_type.savefig('activity_type.png')
+    #activity_type = data['activity'].value_counts().plot(kind='bar', title='Activity type')
+    plt.show()
 
     # DATA PREPROCESSING
     data_convoluted = []
     labels = []
 
+    """
     # Slide a "SEGMENT_TIME_SIZE" wide window with a step size of "TIME_STEP"
     for i in range(0, len(data) - SEGMENT_TIME_SIZE, TIME_STEP):
         x = data['x-axis'].values[i: i + SEGMENT_TIME_SIZE]
@@ -135,6 +141,7 @@ if __name__ == '__main__':
     print("X test size: ", len(X_test))
     print("y train size: ", len(y_train))
     print("y test size: ", len(y_test))
+
 
 
     ##### BUILD A MODEL
@@ -187,10 +194,10 @@ if __name__ == '__main__':
     error_plot = plt.figure(figsize=(12, 8))
 
     plt.plot(np.array(history['train_loss']), "r--", label="Train loss")
-    plt.plot(np.array(history['train_acc']), "g--", label="Train accuracy")
+    plt.plot(np.array(history['train_acc']), "b--", label="Train accuracy")
 
     plt.plot(np.array(history['test_loss']), "r-", label="Test loss")
-    plt.plot(np.array(history['test_acc']), "g-", label="Test accuracy")
+    plt.plot(np.array(history['test_acc']), "b-", label="Test accuracy")
 
     plt.title("Training session's progress over iterations")
     plt.legend(loc='upper right', shadow=True)
@@ -206,10 +213,10 @@ if __name__ == '__main__':
     max_predictions = np.argmax(predictions, axis=1)
     confusion_matrix = metrics.confusion_matrix(max_test, max_predictions)
 
-    confusion_matrix = plt.figure(figsize=(16, 14))
-    sns.heatmap(confusion_matrix, xticklabels=LABELS, yticklabels=LABELS, annot=True, fmt="d");
+    plt.figure(figsize=(16, 14))
+    sns.heatmap(confusion_matrix/(np.sum(confusion_matrix, axis=1, keepdims=1)), xticklabels=LABELS, yticklabels=LABELS, annot=True);
     plt.title("Confusion matrix")
     plt.ylabel('True label')
     plt.xlabel('Predicted label')
-    confusion_matrix.savefig('confusion_matrix.png')
-    #plt.show();
+    plt.show();
+    """
