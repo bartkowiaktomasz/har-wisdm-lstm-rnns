@@ -102,19 +102,18 @@ if __name__ == '__main__':
     data = data.dropna()
 
     # SHOW GRAPH FOR JOGGING
-    data[data['activity'] == 'Jogging'][['x-axis']][:50].plot(subplots=True, figsize=(16, 12), title='Jogging')
-    plt.xlabel('Timestep')
-    plt.ylabel('X acceleration (dg)')
+    #data[data['activity'] == 'Jogging'][['x-axis']][:50].plot(subplots=True, figsize=(16, 12), title='Jogging')
+    #plt.xlabel('Timestep')
+    #plt.ylabel('X acceleration (dg)')
 
     # SHOW ACTIVITY GRAPH
     #activity_type = data['activity'].value_counts().plot(kind='bar', title='Activity type')
-    plt.show()
 
     # DATA PREPROCESSING
     data_convoluted = []
     labels = []
 
-    """
+
     # Slide a "SEGMENT_TIME_SIZE" wide window with a step size of "TIME_STEP"
     for i in range(0, len(data) - SEGMENT_TIME_SIZE, TIME_STEP):
         x = data['x-axis'].values[i: i + SEGMENT_TIME_SIZE]
@@ -219,4 +218,3 @@ if __name__ == '__main__':
     plt.ylabel('True label')
     plt.xlabel('Predicted label')
     plt.show();
-    """
