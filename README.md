@@ -7,6 +7,7 @@ The data used for classification is provided by the Wireless Sensor Data Mining 
 It consists of _1,098,207_ examples of various physical activities (sampled at _20Hz_) with _6_ attributes:
 `user,activity,timestamp,x-acceleration,y-acceleration,z-acceleration`, and the _activities_ include: `Walking, Jogging, Upstairs, Downstairs, Sitting, Standing`. 
 ![X acceleration for Jogging](images/activity_type.png)
+
 Original research done on this dataset can be found [here](http://www.cis.fordham.edu/wisdm/public_files/sensorKDD-2010.pdf).
 
 
