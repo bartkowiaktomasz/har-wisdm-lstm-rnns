@@ -30,7 +30,7 @@ The data needs to be separated into features and labels and then further into tr
 Long short-term memory (LSTM) Recurrent Neural Networks (RNNs) are used to model temporal data (i.e. speech recognition, NLP, human activity recognition), where there is a need to keep some state information. More info on LSTMs can be found [here](https://colah.github.io/posts/2015-08-Understanding-LSTMs/).
 
 ## Results
-The classifier achieves the accuracy of _95%_, though it might be slightly improved by decreasing the _step size_ of _sliding window_.
+The classifier achieves the accuracy of _94%_, though it might presumably be slightly improved by decreasing the _step size_ of _sliding window_.
 The following graphs show the train/test error/accuracy for each epoch and the final confusion matrix (normalised so that each row sums to one).
 ![Train/test set accuracy/error ](images/error_accuracy_epochs.png) 
 ![Confusion matrix ](images/confusion_matrix.png)

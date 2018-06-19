@@ -102,12 +102,13 @@ if __name__ == '__main__':
     data = data.dropna()
 
     # SHOW GRAPH FOR JOGGING
-    #data[data['activity'] == 'Jogging'][['x-axis']][:50].plot(subplots=True, figsize=(16, 12), title='Jogging')
-    #plt.xlabel('Timestep')
-    #plt.ylabel('X acceleration (dg)')
+    data[data['activity'] == 'Jogging'][['x-axis']][:50].plot(subplots=True, figsize=(16, 12), title='Jogging')
+    plt.xlabel('Timestep')
+    plt.ylabel('X acceleration (dg)')
 
     # SHOW ACTIVITY GRAPH
-    #activity_type = data['activity'].value_counts().plot(kind='bar', title='Activity type')
+    activity_type = data['activity'].value_counts().plot(kind='bar', title='Activity type')
+    #plt.show()
 
     # DATA PREPROCESSING
     data_convoluted = []
@@ -153,7 +154,7 @@ if __name__ == '__main__':
 
     # LOSS
     l2 = L2_LOSS * sum(tf.nn.l2_loss(i) for i in tf.trainable_variables())
-    loss = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=y_pred, labels=y)) + l2
+    loss = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits_v2(logits=y_pred, labels=y)) + l2
 
     # OPTIMIZER
     optimizer = tf.train.AdamOptimizer(learning_rate=LEARNING_RATE).minimize(loss)
@@ -204,7 +205,7 @@ if __name__ == '__main__':
     plt.xlabel('Training Epoch')
     plt.ylim(0)
     error_plot.savefig('error_plot.png')
-    #plt.show()
+    plt.show()
 
 
     # CONFUSION MATRIX
