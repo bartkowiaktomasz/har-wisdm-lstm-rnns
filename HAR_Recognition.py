@@ -39,7 +39,6 @@ DATA_PATH = 'data/WISDM_ar_v1.1_raw.txt'
 RANDOM_SEED = 13
 
 # Data preprocessing
-SEGMENT_TIME_SIZE = 200
 TIME_STEP = 100
 
 # Model
@@ -48,11 +47,16 @@ N_FEATURES = 3  # x-acceleration, y-acceleration, z-acceleration
 
 # Hyperparameters
 N_LSTM_LAYERS = 2
-N_HIDDEN_NEURONS = 32
 N_EPOCHS = 50
-BATCH_SIZE = 64
 L2_LOSS = 0.0015
 LEARNING_RATE = 0.0025
+
+# Hyperparameters optimized
+SEGMENT_TIME_SIZE = 180
+N_HIDDEN_NEURONS = 30
+BATCH_SIZE = 32
+
+
 
 ##################################################
 ### FUNCTIONS
@@ -187,6 +191,7 @@ if __name__ == '__main__':
 
         print(f'epoch: {i} test accuracy: {acc_test} loss: {loss_test}')
 
+    saver.save(sess, "./classificator.ckpt")
     predictions, acc_final, loss_final = sess.run([y_pred_softmax, accuracy, loss], feed_dict={X: X_test, y: y_test})
     print(f'final results: accuracy: {acc_final} loss: {loss_final}')
 
@@ -205,7 +210,7 @@ if __name__ == '__main__':
     plt.xlabel('Training Epoch')
     plt.ylim(0)
     error_plot.savefig('error_plot.png')
-    plt.show()
+    # plt.show()
 
 
     # CONFUSION MATRIX
