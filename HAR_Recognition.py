@@ -189,7 +189,7 @@ if __name__ == '__main__':
 
         print(f'epoch: {i} test accuracy: {acc_test} loss: {loss_test}')
 
-    saver.save(sess, "./classificator.ckpt")
+    # saver.save(sess, "./classificator.ckpt")
     predictions, acc_final, loss_final = sess.run([y_pred_softmax, accuracy, loss], feed_dict={X: X_test, y: y_test})
     print(f'final results: accuracy: {acc_final} loss: {loss_final}')
 
