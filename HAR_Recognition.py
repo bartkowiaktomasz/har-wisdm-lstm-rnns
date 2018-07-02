@@ -47,7 +47,7 @@ N_FEATURES = 3  # x-acceleration, y-acceleration, z-acceleration
 
 # Hyperparameters
 N_LSTM_LAYERS = 2
-N_EPOCHS = 50
+N_EPOCHS = 1
 L2_LOSS = 0.0015
 LEARNING_RATE = 0.0025
 
@@ -66,34 +66,34 @@ BATCH_SIZE = 32
 # Input of shape (BATCH_SIZE, SEGMENT_TIME_SIZE, N_FEATURES)
 def createLSTM(X):
 
-    W = {
-        'hidden': tf.Variable(tf.random_normal([N_FEATURES, N_HIDDEN_NEURONS])),
-        'output': tf.Variable(tf.random_normal([N_HIDDEN_NEURONS, N_CLASSES]))
-    }
+        W = {
+            'hidden': tf.Variable(tf.random_normal([N_FEATURES, N_HIDDEN_NEURONS])),
+            'output': tf.Variable(tf.random_normal([N_HIDDEN_NEURONS, N_CLASSES]))
+        }
 
-    b = {
-        'hidden': tf.Variable(tf.random_normal([N_HIDDEN_NEURONS], mean=1.0)),
-        'output': tf.Variable(tf.Variable(tf.random_normal([N_CLASSES])))
-    }
+        b = {
+            'hidden': tf.Variable(tf.random_normal([N_HIDDEN_NEURONS], mean=1.0)),
+            'output': tf.Variable(tf.Variable(tf.random_normal([N_CLASSES])))
+        }
 
-    # Transpose and then reshape to 2D of size (BATCH_SIZE * SEGMENT_TIME_SIZE, N_FEATURES)
-    X = tf.transpose(X, [1, 0, 2])
-    X = tf.reshape(X, [-1, N_FEATURES])
+        # Transpose and then reshape to 2D of size (BATCH_SIZE * SEGMENT_TIME_SIZE, N_FEATURES)
+        X = tf.transpose(X, [1, 0, 2])
+        X = tf.reshape(X, [-1, N_FEATURES])
 
-    hidden = tf.nn.relu(tf.matmul(X, W['hidden']) + b['hidden'])
-    hidden = tf.split(hidden, SEGMENT_TIME_SIZE, 0)
+        hidden = tf.nn.relu(tf.matmul(X, W['hidden']) + b['hidden'])
+        hidden = tf.split(hidden, SEGMENT_TIME_SIZE, 0)
 
-    # Stack two LSTM cells on top of each other
-    lstm_cell_1 = tf.contrib.rnn.BasicLSTMCell(N_HIDDEN_NEURONS, forget_bias=1.0)
-    lstm_cell_2 = tf.contrib.rnn.BasicLSTMCell(N_HIDDEN_NEURONS, forget_bias=1.0)
-    lstm_layers = tf.contrib.rnn.MultiRNNCell([lstm_cell_1, lstm_cell_2])
+        # Stack two LSTM cells on top of each other
+        lstm_cell_1 = tf.contrib.rnn.BasicLSTMCell(N_HIDDEN_NEURONS, forget_bias=1.0)
+        lstm_cell_2 = tf.contrib.rnn.BasicLSTMCell(N_HIDDEN_NEURONS, forget_bias=1.0)
+        lstm_layers = tf.contrib.rnn.MultiRNNCell([lstm_cell_1, lstm_cell_2])
 
-    outputs, _ = tf.contrib.rnn.static_rnn(lstm_layers, hidden, dtype=tf.float32)
+        outputs, _ = tf.contrib.rnn.static_rnn(lstm_layers, hidden, dtype=tf.float32)
 
-    # Get output for the last time step from a "many to one" architecture
-    last_output = outputs[-1]
+        # Get output for the last time step from a "many to one" architecture
+        last_output = outputs[-1]
 
-    return tf.matmul(last_output, W['output'] + b['output'])
+        return tf.matmul(last_output, W['output'] + b['output'])
 
 ##################################################
 ### MAIN
@@ -117,7 +117,6 @@ if __name__ == '__main__':
     # DATA PREPROCESSING
     data_convoluted = []
     labels = []
-
 
     # Slide a "SEGMENT_TIME_SIZE" wide window with a step size of "TIME_STEP"
     for i in range(0, len(data) - SEGMENT_TIME_SIZE, TIME_STEP):
@@ -147,14 +146,13 @@ if __name__ == '__main__':
     print("y test size: ", len(y_test))
 
 
-
     ##### BUILD A MODEL
     # Placeholders
     X = tf.placeholder(tf.float32, [None, SEGMENT_TIME_SIZE, N_FEATURES], name="X")
-    y = tf.placeholder(tf.float32, [None, N_CLASSES])
+    y = tf.placeholder(tf.float32, [None, N_CLASSES], name="y")
 
     y_pred = createLSTM(X)
-    y_pred_softmax = tf.nn.softmax(y_pred)
+    y_pred_softmax = tf.nn.softmax(y_pred, name="y_pred_softmax")
 
     # LOSS
     l2 = L2_LOSS * sum(tf.nn.l2_loss(i) for i in tf.trainable_variables())
@@ -223,4 +221,4 @@ if __name__ == '__main__':
     plt.title("Confusion matrix")
     plt.ylabel('True label')
     plt.xlabel('Predicted label')
-    plt.show();
+    # plt.show();
