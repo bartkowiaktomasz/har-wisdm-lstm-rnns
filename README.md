@@ -2,6 +2,8 @@
 # Human Activity Recognition on the Wireless Sensor Data Mining (WISDM) dataset using LSTM Recurrent Neural Networks  
 This repository cotains code used to recognize human activity based on the Wireless Sensor Data Mining (WISDM) dataset using LSTM (Long short-term memory) and is heavily based on the article by [Venelin Valkov](https://medium.com/@curiousily/human-activity-recognition-using-lstms-on-android-tensorflow-for-hackers-part-vi-492da5adef64).
 
+[This repository](https://github.com/bartkowiaktomasz/har-wisdm-bidirectional-lstm-rnns) contains an improved version of the model, where _Bidirectional LSTM_ is used with _Bayesian Optimization_ to find optimal architecture.
+
 ## Dataset
 The data used for classification is provided by the Wireless Sensor Data Mining (WISDM) Lab and can be downloaded  [here](http://www.cis.fordham.edu/wisdm/dataset.php).
 It consists of _1,098,207_ examples of various physical activities (sampled at _20Hz_) with _6_ attributes:
