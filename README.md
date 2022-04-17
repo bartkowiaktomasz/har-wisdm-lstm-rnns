@@ -49,3 +49,18 @@ The following graphs show the train/test error/accuracy for each epoch and the f
 
 ### Use
 1. Run the script with  `python3 HAR_Recognition.py`
+
+
+## CNN Classification
+
+### Results
+![Train/test set accuracy ](images_cnn/acc1.png)
+![Train/test set error ](images_cnn/loss1.png) 
+![Confusion matrix ](images_cnn/conf1.png)
+
+## Convolutional Autoencoder Classification
+
+### Results
+![Train/test set accuracy ](images_cnn/acc2.png)
+![Train/test set error ](images_cnn/loss2.png) 
+![Confusion matrix ](images_cnn/conf2.png)
