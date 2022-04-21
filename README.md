@@ -68,5 +68,5 @@ The following graphs show the train/test error/accuracy for each epoch and the f
 ![Train/test set error ](images_cnn/loss2.png) 
 
 <p align="center">
-<a href="https://raw.githubusercontent.com/mo26-web/har-wisdm-cnn/master/images_cnn/conf2.png"><img src="https://raw.githubusercontent.com/mo26-web/har-wisdm-cnn/master/images_cnn/conf2.png" align="center" height="460" width="520" ></a>
+<a href="https://raw.githubusercontent.com/mo26-web/har-wisdm-cnn/master/images_cnn/conf2.png"><img src="https://raw.githubusercontent.com/mo26-web/har-wisdm-cnn/master/images_cnn/conf2.png" align="center" height="420" width="540" ></a>
 </p>
