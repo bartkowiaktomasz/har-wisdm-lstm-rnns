@@ -54,7 +54,7 @@ The following graphs show the train/test error/accuracy for each epoch and the f
 ## CNN Classification
 
 ### Results
-![Train/test set accuracy ](images_cnn/acc1.png height="48" width="48")
+![Train/test set accuracy ](images_cnn/acc1.png)
 ![Train/test set error ](images_cnn/loss1.png) 
 ![Confusion matrix ](images_cnn/conf1.png)
 
