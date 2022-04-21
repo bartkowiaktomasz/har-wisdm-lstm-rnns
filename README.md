@@ -58,7 +58,7 @@ The following graphs show the train/test error/accuracy for each epoch and the f
 ![Train/test set error ](images_cnn/loss1.png) 
 
 <p align="center">
-<a href="https://raw.githubusercontent.com/mo26-web/har-wisdm-cnn/master/images_cnn/conf1.png"><img src="https://raw.githubusercontent.com/mo26-web/har-wisdm-cnn/master/images_cnn/conf1.png" align="center" height="560" width="560" ></a>
+<a href="https://raw.githubusercontent.com/mo26-web/har-wisdm-cnn/master/images_cnn/conf1.png"><img src="https://raw.githubusercontent.com/mo26-web/har-wisdm-cnn/master/images_cnn/conf1.png" align="center" height="580" width="580" ></a>
 </p>
 
 ## Convolutional Autoencoder Classification
@@ -68,5 +68,5 @@ The following graphs show the train/test error/accuracy for each epoch and the f
 ![Train/test set error ](images_cnn/loss2.png) 
 
 <p align="center">
-<a href="https://raw.githubusercontent.com/mo26-web/har-wisdm-cnn/master/images_cnn/conf2.png"><img src="https://raw.githubusercontent.com/mo26-web/har-wisdm-cnn/master/images_cnn/conf2.png" align="center" ></a>
+<a href="https://raw.githubusercontent.com/mo26-web/har-wisdm-cnn/master/images_cnn/conf2.png"><img src="https://raw.githubusercontent.com/mo26-web/har-wisdm-cnn/master/images_cnn/conf2.png" align="center" height="580" width="580" ></a>
 </p>
